@@ -1,5 +1,6 @@
-package com.AWS.springboot.web;
+package com.AWS.springboot;
 
+import com.AWS.springboot.web.HelloController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
 
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -20,11 +21,11 @@ public class HelloControllerTest {
     private MockMvc mvc;
 
     @Test
-    public void testHello() throws Exception{
+    public void helloTest() throws Exception{
         String hello = "hello";
 
         mvc.perform(get("/hello"))
                 .andExpect(status().isOk())
-                .andExpect((ResultMatcher) content().string(hello));
+                .andExpect(content().string(hello));
     }
 }
