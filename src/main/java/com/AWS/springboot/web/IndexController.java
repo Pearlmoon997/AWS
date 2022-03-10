@@ -1,5 +1,7 @@
 package com.AWS.springboot.web;
 
+import com.AWS.springboot.config.auth.LoginUser;
+import com.AWS.springboot.config.auth.dto.SessionUser;
 import com.AWS.springboot.service.posts.PostsService;
 import com.AWS.springboot.web.dto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -8,15 +10,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequiredArgsConstructor
 public class IndexController {
 
     private final PostsService postsService;
+    private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String index(Model model){
+    public String index(Model model, @LoginUser SessionUser user){
         model.addAttribute("posts", postsService.findAllAsc());
+        if(user != null){
+            model.addAttribute("userName", user.getName());
+        }
         return "index";
     }
 
