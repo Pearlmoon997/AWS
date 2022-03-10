@@ -11,7 +11,8 @@
                 <a href="/logout" class="btn btn-outline-info active" role="button">Logout</a>
             {{/userName}}
             {{^userName}}
-                <a href="/oauth2/authorization/google" class="btn btn-outline-success active" role="button">Google Login</a>
+                <button class="btn btn-success" id="googlePopUp">Google Login</button>
+<!--                <a href="/oauth2/authorization/google" class="btn btn-outline-success active" role="button">Google Login</a>-->
             {{/userName}}
         </div>
     </div>
@@ -40,3 +41,12 @@
 </div>
 
 {{>layouts/footer}}
+
+<script>
+    const googleBtn = document.querySelector("#googlePopUp");
+    const url = "/oauth2/authorization/google";
+    const name = "Google Login";
+    googleBtn.addEventListener("click", function() {
+        window.open(url, name, "width=500, height=500")
+    })
+</script>
